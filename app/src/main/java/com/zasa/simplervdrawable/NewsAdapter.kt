@@ -13,9 +13,19 @@ import androidx.recyclerview.widget.RecyclerView
  */
 class NewsAdapter(private val newsList : ArrayList<News>) : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
+    lateinit var mListener : onItemClickListner
+
+    interface onItemClickListner{
+        fun onItemlick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListner){
+        mListener = listener
+
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
-        return ViewHolder(itemView)
+        return ViewHolder(itemView, mListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -26,9 +36,16 @@ class NewsAdapter(private val newsList : ArrayList<News>) : RecyclerView.Adapter
 
     override fun getItemCount() = newsList.size
 
-    inner class ViewHolder(itemView :View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView :View, listener: onItemClickListner) : RecyclerView.ViewHolder(itemView) {
         val titleImage : ImageView = itemView.findViewById(R.id.ivImage)
         val heading : TextView = itemView.findViewById(R.id.tvHeading)
+
+        init {
+            itemView.setOnClickListener {
+                listener.onItemlick(adapterPosition)
+            }
+        }
+
     }
 
 }

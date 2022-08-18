@@ -2,6 +2,7 @@ package com.zasa.simplervdrawable
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -54,6 +55,15 @@ class MainActivity : AppCompatActivity() {
             val news = News(imageId[i], heading[i])
             newsList.add(news)
         }
-        rvNews.adapter = NewsAdapter(newsList)
+        var adapter = NewsAdapter(newsList)
+        rvNews.adapter = adapter
+
+        adapter.setOnItemClickListener(object : NewsAdapter.onItemClickListner{
+            override fun onItemlick(position: Int) {
+                Toast.makeText(this@MainActivity, "user clicked position $position", Toast.LENGTH_SHORT).show()
+
+            }
+
+        })
     }
 }
