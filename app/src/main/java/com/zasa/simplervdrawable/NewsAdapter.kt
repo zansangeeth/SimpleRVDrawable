@@ -16,7 +16,7 @@ class NewsAdapter(private val newsList : ArrayList<News>) : RecyclerView.Adapter
     lateinit var mListener : onItemClickListner
 
     interface onItemClickListner{
-        fun onItemlick(position: Int)
+        fun onItemClick(position: Int)
     }
 
     fun setOnItemClickListener(listener: onItemClickListner){
@@ -42,7 +42,7 @@ class NewsAdapter(private val newsList : ArrayList<News>) : RecyclerView.Adapter
 
         init {
             itemView.setOnClickListener {
-                listener.onItemlick(adapterPosition)
+                listener.onItemClick(adapterPosition)
             }
         }
 

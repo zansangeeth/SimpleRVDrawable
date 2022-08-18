@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         rvNews.adapter = adapter
 
         adapter.setOnItemClickListener(object : NewsAdapter.onItemClickListner{
-            override fun onItemlick(position: Int) {
+            override fun onItemClick(position: Int) {
                 Toast.makeText(this@MainActivity, "user clicked position $position", Toast.LENGTH_SHORT).show()
 
             }
