@@ -1,5 +1,6 @@
 package com.zasa.simplervdrawable
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -12,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var newsList : ArrayList<News>
     private lateinit var imageId : Array<Int>
     private lateinit var heading : Array<String>
+    private lateinit var fullNews : Array<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +44,19 @@ class MainActivity : AppCompatActivity() {
             "Homemaker, economist: Candidates from all walks of life in Bengal assembly"
         )
 
+        fullNews = arrayOf(
+            getString(R.string.news_a),
+            getString(R.string.news_b),
+            getString(R.string.news_c),
+            getString(R.string.news_d),
+            getString(R.string.news_e),
+            getString(R.string.news_f),
+            getString(R.string.news_g),
+            getString(R.string.news_h),
+            getString(R.string.news_i),
+        )
+
+
         rvNews = findViewById(R.id.rvNews)
         rvNews.layoutManager = LinearLayoutManager(this)
         newsList = arrayListOf<News>()
@@ -61,9 +76,14 @@ class MainActivity : AppCompatActivity() {
         adapter.setOnItemClickListener(object : NewsAdapter.onItemClickListner{
             override fun onItemClick(position: Int) {
                 Toast.makeText(this@MainActivity, "user clicked position $position", Toast.LENGTH_SHORT).show()
-
+                val intent = Intent(this@MainActivity, NewsActivity::class.java)
+                intent.putExtra("heading", newsList[position].heading)
+                intent.putExtra("titleImage", newsList[position].titleImage)
+                intent.putExtra("fullNews", fullNews[position])
+                startActivity(intent)
             }
 
         })
+
     }
 }
